@@ -8,7 +8,7 @@ The script `macos/install-macos.sh` automates the initial configuration of a mac
 
 ### Usage
 
-To run the installation:
+Run the installation script:
 
 ```bash
 cd ~/dotfiles
@@ -16,6 +16,11 @@ bash macos/install-macos.sh
 ```
 
 ---
-*Note: This is a personal repository, feel free to adapt it to your needs.*
 
+*Note: This is a personal repository. Feel free to adapt it to your needs.*
+
+---
+
+<p align="center">
 Made with ☕ and a whole lot of terminal time.
+</p>
