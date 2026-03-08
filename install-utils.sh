@@ -44,12 +44,12 @@ install_brew() {
 create_symlinks() {
     echo "Removing existing dotfiles..."
     #rm -rf ~/.vim ~/.vimrc ~/.zshrc ~/.config/nvim ~/.ideavimrc ~/.config/starship.toml ~/.config/ghostty 2>/dev/null
-    rm -rf ~/.config/starship.toml ~/.config/ghostty 2>/dev/null
+    rm -rf ~/.config/starship.toml ~/.zshrc ~/.config/ghostty 2>/dev/null
 
     echo "Creating symlinks..."
     mkdir -p ~/projects ~/.config 
 
-   
+    ln -s ~/dotfiles/zshrc ~/.zshrc
     ln -s ~/dotfiles/ghostty ~/.config/ghostty
     ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
   
@@ -60,8 +60,6 @@ create_symlinks() {
 install_brew_packages() {
     brew update
 
-    # Install lazydocker (requires both tap and package)
-    brew install jesseduffield/lazydocker/lazydocker
     brew install lazydocker
     brew install neovim
     brew install zoxide
