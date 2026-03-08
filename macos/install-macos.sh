@@ -2,6 +2,16 @@
 
 set -e
 
+
+# macOS-specific dotfiles installation script
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Source the shared utilities
+source "$SCRIPT_DIR/../install-utils.sh"
+
+
 echo "Starting macOS development environment setup..."
 
 ########################################
@@ -51,7 +61,7 @@ set_hostname() {
 # macOS defaults
 ########################################
 
-configure_macos() {
+configure_macos_defaults() {
 
   echo "Configuring macOS defaults..."
 
@@ -75,42 +85,15 @@ configure_macos() {
 
 }
 
-########################################
-# Install Homebrew
-########################################
 
-install_homebrew() {
 
-  if command -v brew &>/dev/null; then
-    echo "Homebrew already installed"
-  else
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
 
-  eval "$(/opt/homebrew/bin/brew shellenv)" || true
-
-}
-
-########################################
-# CLI tools
-########################################
-
-install_cli_tools() {
-
-  brew list git &>/dev/null || brew install git
-  brew list tmux &>/dev/null || brew install tmux
-  brew list reattach-to-user-namespace &>/dev/null || brew install reattach-to-user-namespace
-  brew list node &>/dev/null || brew install node
-  brew list starship &>/dev/null || brew install starship
-
-}
 
 ########################################
 # GUI apps
 ########################################
 
-install_apps() {
+install_brew_cask_packages() {
 
   [[ -d "/Applications/Ghostty.app" ]] || brew install --cask ghostty
   [[ -d "/Applications/Visual Studio Code.app" ]] || brew install --cask visual-studio-code
@@ -124,7 +107,7 @@ install_apps() {
 # Fonts
 ########################################
 
-install_fonts() {
+install_macos_fonts() {
 
   brew tap homebrew/cask-fonts || true
 
@@ -133,35 +116,7 @@ install_fonts() {
 
 }
 
-########################################
-# Setup ZSH + Starship
-########################################
 
-setup_zsh() {
-
-  if [[ "$SHELL" != *zsh ]]; then
-    chsh -s "$(which zsh)"
-  fi
-
-  if ! grep -q starship ~/.zshrc 2>/dev/null; then
-    echo 'eval "$(starship init zsh)"' >>~/.zshrc
-  fi
-
-}
-
-########################################
-# Install tmux Catppuccin theme
-########################################
-
-install_catppuccin_themes() {
-
-  mkdir -p ~/.tmux/plugins
-
-  if [[ ! -d ~/.tmux/plugins/catppuccin ]]; then
-    git clone https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin
-  fi
-
-}
 
 ########################################
 # Main setup
@@ -172,17 +127,17 @@ setup() {
   suppress_login_message
   install_xcode_tools
   set_hostname
-  configure_macos
-  install_homebrew
-
-  brew update
-
-  install_cli_tools
-  install_apps
-  install_fonts
-
-  setup_zsh
-  install_catppuccin_themes
+  install_macos_fonts
+  #prompt_for_git_config
+  configure_macos_defaults
+  install_brew
+  install_brew_packages
+  install_brew_cask_packages
+  #apply_git_config
+  install_node_and_tools
+  create_symlinks
+  setup_zsh_shell
+  print_completion
 
   echo "Setup complete!"
 
