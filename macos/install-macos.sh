@@ -101,6 +101,7 @@ install_brew_cask_packages() {
   [[ -d "/Applications/Raycast.app" ]] || brew install --cask raycast
   [[ -d "/Applications/Google Chrome.app" ]] || brew install --cask google-chrome
   [[ -d "/Applications/Claude.app" ]] || brew install --cask claude
+  [[ -d "/Applications/Logi Options+.app" ]] || brew install --cask logi-options+
 
 }
 
