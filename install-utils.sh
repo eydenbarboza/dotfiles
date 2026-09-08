@@ -60,6 +60,7 @@ create_symlinks() {
 install_brew_packages() {
     brew update
 
+    brew untap jesseduffield/lazydocker 2>/dev/null || true
     brew install lazydocker
     brew install neovim
     brew install zoxide

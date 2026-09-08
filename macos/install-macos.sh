@@ -165,6 +165,6 @@ done 2>/dev/null &
 
 KEEPALIVE_PID=$!
 
-trap "kill $KEEPALIVE_PID" EXIT INT TERM
+trap "kill $KEEPALIVE_PID 2>/dev/null || true" EXIT INT TERM
 
 setup
