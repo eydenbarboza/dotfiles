@@ -100,6 +100,7 @@ install_brew_cask_packages() {
   [[ -d "/Applications/Docker.app" ]] || brew install --cask docker-desktop
   [[ -d "/Applications/Raycast.app" ]] || brew install --cask raycast
   [[ -d "/Applications/Google Chrome.app" ]] || brew install --cask google-chrome
+  [[ -d "/Applications/Claude.app" ]] || brew install --cask claude
 
 }
 
