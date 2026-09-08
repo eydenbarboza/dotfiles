@@ -66,7 +66,7 @@ configure_macos_defaults() {
   echo "Configuring macOS defaults..."
 
   #defaults write -g ApplePressAndHoldEnabled -bool false
-  defaults write NSGlobalDomain KeyRepeat -int 1
+  defaults write NSGlobalDomain KeyRepeat -int 2
   defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
   defaults write com.apple.dock autohide -bool true
