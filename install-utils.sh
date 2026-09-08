@@ -74,7 +74,15 @@ install_brew_packages() {
     brew install zig
     brew install lazygit
     brew install gemini-cli
- 
+
+    # Python
+    brew install uv
+    brew install ruff
+
+    # C++
+    brew install cmake
+    brew install llvm
+    brew install ninja
 
     # Install fonts
     echo "Installing fonts via Homebrew..."
@@ -120,6 +128,17 @@ install_node_and_tools() {
     fnm default latest
 
     echo "Node.js and AI CLI tools installed."
+}
+
+# Install Rust via rustup
+install_rust() {
+    if check_command rustup; then
+        echo "Rust already installed."
+    else
+        echo "Installing Rust via rustup..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source "$HOME/.cargo/env"
+    fi
 }
 
 # Print completion message

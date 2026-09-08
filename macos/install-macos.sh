@@ -135,6 +135,7 @@ setup() {
   install_brew_cask_packages
   #apply_git_config
   install_node_and_tools
+  install_rust
   create_symlinks
   setup_zsh_shell
   print_completion
