@@ -110,8 +110,6 @@ install_brew_cask_packages() {
 
 install_macos_fonts() {
 
-  brew tap homebrew/cask-fonts || true
-
   brew list --cask font-cascadia-code &>/dev/null || brew install --cask font-cascadia-code
   brew list --cask font-jetbrains-mono &>/dev/null || brew install --cask font-jetbrains-mono
 
@@ -128,10 +126,10 @@ setup() {
   suppress_login_message
   install_xcode_tools
   set_hostname
-  install_macos_fonts
   #prompt_for_git_config
   configure_macos_defaults
   install_brew
+  install_macos_fonts
   install_brew_packages
   install_brew_cask_packages
   #apply_git_config

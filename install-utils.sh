@@ -84,10 +84,6 @@ install_brew_packages() {
     brew install llvm
     brew install ninja
 
-    # Install fonts
-    echo "Installing fonts via Homebrew..."
-    brew install --cask font-cascadia-code
-
     if ! check_command fzf; then
         brew install fzf
         # Add FZF shortcuts non-interactively (enable all features)
